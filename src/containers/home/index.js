@@ -1,3 +1,4 @@
+import { TextareaAutosize } from '@material-ui/core'
 import React, { useContext } from 'react'
 import { Redirect } from "react-router-dom"
 import { AuthContext } from "../../components/auth"
@@ -13,7 +14,9 @@ import {
         DivMessageSections,
         TextMessage,
         DivChatControls, 
-        Button} from "./styles/home"
+        Button,
+        Textarea,
+        Div} from "./styles/home"
 
 //import { Button } from '@material-ui/core';
 
@@ -29,20 +32,17 @@ function Home() {
             <Section>
                 <DivUsers>
                         {   users.length > 0 ?
-                            users.map(user => {
-                                return (<DivName>
+                            users.filter(name => name !== currentUser.displayName).map(user => {
+                                return (
+                                <DivName key={user.uid}>
                                     <DivPic>
                                     <Image src="https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png"/>
                                     </DivPic>
-                                    <div style={{ display: "flex",
-                                                flex: 1,
-                                                margin: "0 10px",
-                                                justifyContent: "space-between"}}
-                                    >
+                                    <Div>
                                         <span style={{ fontWeight: 500 }}>{user.displayName}</span>
-                                        {/*isOnline ? <span>online</span> : <span>offline</span>*/}
-                                        <span>online</span>
-                                    </div>
+                                        {isOnline ? <span>online</span> : <span>offline</span>}
+                                        {/*<span>online</span>*/}
+                                    </Div>
                                 </DivName>)
                         }) : null
                         }
@@ -56,12 +56,7 @@ function Home() {
                             </div>
                         </DivMessageSections>
                         <DivChatControls>
-                            <textarea style={{ 
-                                                width: "100%", 
-                                                resize: "none",
-                                                fontSize: "15px"}} 
-                                      placeholder="Remember, be nice!"
-                            />
+                            <Textarea placeholder="Remember, be nice!"/>
                             <Button>Send</Button>
                         </DivChatControls>
                 </DivChatArea>

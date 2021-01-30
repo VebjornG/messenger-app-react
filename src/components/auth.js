@@ -10,13 +10,14 @@ export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null)
     const [name, setName] = useState('')
     const [isOnline, setIsOnline] = useState(null)
-    const [users, setUsers] = useState(null)
+    const [users, setUsers] = useState([])
 
     useEffect(() => {
         firebaseConfig.auth().onAuthStateChanged((user) => {   // If the authentication state changes (that is, when the user 
             setCurrentUser(user)
             if (user !== null) {
-                setName(user.displayName)
+                setName(user.displayName)                      // Because of updateProfile in signup.js Firebase knows what displayName is
+                //setUsers(user)
             } 
             //setName(user.displayName)
             //setUserId(currentUser.uid)
@@ -34,10 +35,8 @@ export const AuthProvider = ({ children }) => {
             .onSnapshot(function(querySnapshot) {        // Listens for changes in the userdata in Firestore and adds it to users
             const _users = []
             querySnapshot.forEach(function(doc) {
-                //if(doc.data().uid != currentUser.uid) {
                 _users.push(doc.data())
                 setUsers(_users)
-                //}
             })
             console.log(users)
         })

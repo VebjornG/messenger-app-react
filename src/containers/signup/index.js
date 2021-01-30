@@ -48,7 +48,8 @@ const Signup = () => {
                         const loggedInUser = {
                             displayName: result.user.displayName,
                             email: result.user.email,
-                            uid: result.user.uid
+                            uid: result.user.uid,
+                            isOnline: true
                         }
                         db.collection('users').add({
                             displayName: result.user.displayName,
@@ -66,6 +67,7 @@ const Signup = () => {
                     })
                 });
             setName(name)          // Sets name
+            console.log(localStorage.loggedInUser)
             //console.log(name)
             setCurrentUser(true)   // Sets currentUser to true
             //setEmail(email.value)

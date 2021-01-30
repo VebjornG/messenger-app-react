@@ -126,3 +126,16 @@ export const Button = styled.button `
         cursor: pointer;
     }
 `;
+
+export const Textarea = styled.textarea `
+    width: 100%;
+    resize: none;
+    font-size: 15px;
+`;
+
+export const Div = styled.div `
+    display: flex;
+    flex: 1;
+    margin: 0 10px;
+    justify-content: space-between;
+`;
